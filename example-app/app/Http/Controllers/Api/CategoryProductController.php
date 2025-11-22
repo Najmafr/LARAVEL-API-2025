@@ -18,21 +18,30 @@ class CategoryProductController extends Controller
 
     // simpan
     public function store(Request $request){
-        $validateData = $request->validate([
-            'name'=>'required|max:255',
-            'description'=>'nullable|string',
-        ]);
-        $product = CategoryProduct::create($validateData);
-        return response()->json([
-            'status'=>'Succes',
-            'data'=>$product,
-            'message'=>'Tampilkan',
-        ],201);
+        try{
+            $validateData = $request->validate([
+                'name'=>'required|max:255',
+                'description'=>'nullable|string',
+            ]);
+            $product = CategoryProduct::create($validateData);
+            return response()->json([
+                'status'=>'Succes',
+                'data'=>$product,
+                'message'=>'Tampilkan',
+            ],201);
+
+        } catch(\Exception $e){
+            return response()->json([
+                'message'=>$e->getMessage(),
+                'data'=>null
+            ],401);
+        }
     }
 
     // cari
     public function show($id){
         $category=CategoryProduct::find($id);
+        return response()->json($category);
         if(!$category){
             return response()->json([
                 'message'=>'Tidak ada data',
