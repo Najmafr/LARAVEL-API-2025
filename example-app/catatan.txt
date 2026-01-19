@@ -1,0 +1,6 @@
+instal jwt tymon
+ composer require tymon/jwt-auth
+ php artisan jwt:secret
+
+install permision
+ composer require spatie/laravel-permission

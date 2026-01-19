@@ -12,8 +12,19 @@ class CategoryProductController extends Controller
     //
     public function index()
     {
-        $category_product=CategoryProduct::all();
-        return response()->json($category_product);    
+        try{
+            $category_product=CategoryProduct::all();
+            return response()->json([
+                'message'=>'succes',
+                'data'=>$category_product,
+            ],200);
+
+        } catch(\Exception $e){
+            return response()->json([
+                'message'=>$e->getMessage(),
+                'data'=>null,
+            ],401);
+        }    
     }
 
     // simpan

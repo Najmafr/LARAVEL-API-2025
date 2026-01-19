@@ -16,7 +16,10 @@ class ProductVariantController extends Controller
         //
         try{
             $variant = ProductVariant::all();
-            return response()->json($variant);
+            return response()->json([
+                'message'=>'succes',
+                'data'=>$variant,
+            ],200);
 
         } catch(\Exception $e){
             return response()->json([
